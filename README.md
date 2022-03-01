@@ -28,6 +28,40 @@ Historically the project grew from, and works with the OpenEmbedded Project whic
  <br /> 
  <br />
 
+
+## Local.conf
+
+```python
+# This sets the default machine to be qemux86-64 if no other machine is selected:
+MACHINE = "raspberrypi4-64"
+# helloyocto recipe for connecting a python script to a server and Printing hello yocto every 5
+#seconds, nano is GNU nano , tmux for session saving
+EXTRA_IMAGE_FEATURES ?= "debug-tweaks ssh-server-openssh package-management "
+IMAGE_INSTALL_append = "helloyocto nano tmux glibc-utils localedef run-postinsts"
+
+```
+
+## bblayers.conf
+
+```python
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+BBLAYERS ?= " \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/poky/meta \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/poky/meta-poky \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/poky/meta-yocto-bsp \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-openembedded/meta-oe \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-openembedded/meta-python \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-openembedded/meta-networking \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-openembedded/meta-multimedia \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-raspberrypi \
+/home/mahmoud/Mahmoud/Embedded-OS/yocto-project/meta-mine \
+"
+# layer meta-mine shall contain hello-yocto,tmux recipes
+```
 ## Recipes
 
 ### Hello Yocto
